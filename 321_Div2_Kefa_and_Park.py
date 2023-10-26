@@ -1,7 +1,7 @@
 import sys
 from collections import deque, defaultdict, Counter
 
-############ Input Functions ############
+############ ---- Input Functions ---- ############
 input = sys.stdin.readline
 
 def inp():
@@ -14,13 +14,12 @@ def insr():
 def invr():
     return(map(int,input().split()))
 
-############ Output Functions ############
+############ ---- Output Functions ---- ############
 def oupNum(n):
     sys.stdout.write(str(n) + "\n")
 
 def oupList(lst):
     sys.stdout.write(" ".join(map(str, lst)) + "\n")
-
 
 ############ Recursion Trick ############ 
 def bootstrap(f, stack=[]):
@@ -40,9 +39,36 @@ def bootstrap(f, stack=[]):
             return to
     return wrappedfunc
 
-
 def main():
-    pass
+    n, m = inlt()
+    cats = inlt()
+    cats.insert(0, 0)
+    graph = defaultdict(list)
+    while True:
+      edge = inlt()
+      if not edge: break
+      graph[edge[0]].append(edge[1])
+      graph[edge[1]].append(edge[0])
+
+    oupNum(dfs(-1, 1, m, 0, graph, cats))
+
+@bootstrap
+def dfs(parent, curr, sumLimit, conSum, graph, cats):
+  if cats[curr]:
+    conSum += 1
+  else:
+    conSum = 0
+
+  if conSum > sumLimit: return 0
+  if len(graph[curr]) == 1 and graph[curr][0] == parent: return 1
+
+
+  answer = 0
+  for nxt in graph[curr]:
+    if nxt == parent: continue
+    answer += yield dfs(curr, nxt, sumLimit, conSum, graph, cats)
+  return answer
+
 
 if __name__ == '__main__':
     main()
