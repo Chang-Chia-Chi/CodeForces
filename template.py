@@ -1,6 +1,9 @@
 import sys
 from collections import deque, defaultdict, Counter
 
+############ constants ############
+MOD = 1000000007
+
 ############ Input Functions ############
 input = sys.stdin.readline
 
