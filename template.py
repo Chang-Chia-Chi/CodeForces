@@ -21,8 +21,8 @@ def invr():
 def oupNum(n):
     sys.stdout.write(str(n) + "\n")
 
-def oupList(lst):
-    sys.stdout.write(" ".join(map(str, lst)) + "\n")
+def oupList(lst, sep):
+    sys.stdout.write(sep.join(map(str, lst)) + "\n")
 
 
 ############ Recursion Trick ############ 
