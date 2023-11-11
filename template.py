@@ -1,4 +1,5 @@
 import sys
+import math
 import heapq
 from collections import deque, defaultdict, Counter
 
@@ -43,6 +44,11 @@ def bootstrap(f, stack=[]):
                         break
             return to
     return wrappedfunc
+
+
+############ Math Trick ############ 
+def lcm(a, b):
+  return a // math.gcd(a, b) * b
 
 
 def main():
