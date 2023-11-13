@@ -50,6 +50,14 @@ def bootstrap(f, stack=[]):
 def lcm(a, b):
   return a // math.gcd(a, b) * b
 
+def primes(n):
+  visited = [0] * (n+1)
+  for i in range(n+1):
+    if not visited[i]:
+      yield i
+    for j in range(i, n+1, i):
+      visited[j] = True
+
 
 def main():
     pass
