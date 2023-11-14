@@ -52,7 +52,7 @@ def lcm(a, b):
 
 def primes(n):
   visited = [0] * (n+1)
-  for i in range(n+1):
+  for i in range(2, n+1):
     if not visited[i]:
       yield i
     for j in range(i, n+1, i):
