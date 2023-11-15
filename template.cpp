@@ -36,8 +36,12 @@ vector<int>Eratosthenes(int n)
     return primes;
 }
 
-int lcm(int a, int b) {
-  return a*b/__gcd(a, b);
+ll gcd(ll a, ll b) {
+  return b==0?a:gcd(b,a%b);
+}
+
+ll lcm(ll a, ll b) {
+  return a*b/gcd(a, b);
 }
 
 int fpow(int a, int b, int m) {

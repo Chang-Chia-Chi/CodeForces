@@ -1,4 +1,4 @@
-#include <utility>
+#include<utility>
 #include<iostream>
 #include<algorithm>
 #include<cstring>
@@ -36,8 +36,12 @@ vector<int>Eratosthenes(int n)
     return primes;
 }
 
-int lcm(int a, int b) {
-  return a*b/__gcd(a, b);
+ll gcd(ll a, ll b) {
+  return b==0?a:gcd(b,a%b);
+}
+
+ll lcm(ll a, ll b) {
+  return a*b/gcd(a, b);
 }
 
 int fpow(int a, int b, int m) {
@@ -82,7 +86,8 @@ void factorize(int num, map<int, vector<int>>& map) {
   }
 }
 
-int main() {
+
+ll method1() {
   int n;
   cin >> n;
 
@@ -114,6 +119,34 @@ int main() {
       answer *= (ll)fpow(p.first, p.second[1], MOD);
   }
 
-  printf("%lld\n",answer);
+  return answer;
+}
+
+ll method2() {
+  int n;
+  cin >> n;
+
+  ll x;
+  vector<ll> nums;
+  for (int i = 0; i < n; i++)
+  {
+    cin >> x;
+    nums.push_back(x);
+  }
+
+  vector<ll> suf(n+1, 0);
+  ll answer = 0;
+  for (int i = n-1; i >= 0; i--)
+  {
+    answer = gcd(answer, lcm(nums[i], suf[i+1]));
+    suf[i] = gcd(nums[i], suf[i+1]);
+  }
+
+  return answer;
+}
+
+int main() {
+  // cout << method1() << endl;
+  cout << method2() << endl;
   return 0;
 }
