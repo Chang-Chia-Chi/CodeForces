@@ -1,4 +1,4 @@
-#include <utility>
+#include<utility>
 #include<iostream>
 #include<algorithm>
 #include<cstring>
@@ -59,5 +59,36 @@ int fpow(int a, int b, int m) {
 
 // ========== Main Function ==========
 int main() {
+  int n;
+  cin >> n;
+  vector<int> arr(n);
+  for (int i=0; i<n; i++)
+    cin >> arr[i];
+  
+  int curr = 0;
+  vector<int>left(n);
+  for (int i=0; i<n; i++)
+  {
+    curr = max(curr, n-i-1+arr[i]);
+    left[i] = curr;
+  }
+
+  curr = 0;
+  vector<int>right(n);
+  for (int i=n-1; i>=0; i--)
+  {
+    curr = max(curr, i+arr[i]);
+    right[i] = curr;
+  }
+
+  int answer = INT_MAX;
+  for (int i=0; i<n; i++)
+  {
+    int cost = arr[i];
+    if (i > 0) cost = max(cost, left[i-1]);
+    if (i < n-1) cost = max(cost, right[i+1]);
+    answer = min(answer, cost);
+  }
+  cout << answer << endl;
   return 0;
 }
