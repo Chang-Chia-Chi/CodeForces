@@ -75,17 +75,19 @@ int helper() {
   }
 
   cout << "YES" << endl;
+  vector<vector<string>> rows(n, vector<string>(m-1));
+  vector<vector<string>> cols(n-1, vector<string>(m));
+  for (int i=0; i<n; i++)
+  {
+    for (int j=0; j<m-1; j++)
+    {
+      if (j%2 == 0) rows[i][j] = "B";
+      else rows[i][j] = "R";
+    }
+  }
+
   if ((k-(n+m-2)) % 4 == 0)
   {
-    vector<vector<string>> rows(n, vector<string>(m-1));
-    for (int i=0; i<n; i++)
-    {
-      for (int j=0; j<m-1; j++)
-      {
-        if (j%2 == 0) rows[i][j] = "B";
-        else rows[i][j] = "R";
-      }
-    }
     if ((n+m-2)%2 == 0)
     {
       rows[n-1][m-2] = "B";
@@ -97,7 +99,6 @@ int helper() {
       rows[n-2][m-2] = "R";
     }
 
-    vector<vector<string>> cols(n-1, vector<string>(m));
     for (int i=0; i<n-1; i++)
     {
       string color = "B";
@@ -105,33 +106,9 @@ int helper() {
       for (int j=0; j<m; j++)
         cols[i][j] = color;
     }
-
-    for (int i=0; i<n; i++)
-    {
-      string row = rows[i][0];
-      for (int j=1; j<m-1; j++)
-        row += " " + rows[i][j];
-      cout << row << endl;
-    }
-    for (int i=0; i<n-1; i++)
-    {
-      string col = cols[i][0];
-      for (int j=1; j<m; j++)
-        col += " " + cols[i][j];
-      cout << col << endl;
-    }
   }
   else
   {
-    vector<vector<string>> rows(n, vector<string>(m-1));
-    for (int i=0; i<n; i++)
-    {
-      for (int j=0; j<m-1; j++)
-      {
-        if (j%2 == 0) rows[i][j] = "B";
-        else rows[i][j] = "R";
-      }
-    }
     if ((n+m-2)%2 == 0)
     {
       rows[n-1][m-2] = "R";
@@ -143,7 +120,6 @@ int helper() {
       rows[n-2][m-2] = "B";
     }
 
-    vector<vector<string>> cols(n-1, vector<string>(m));
     for (int i=0; i<n-2; i++)
     {
       string color = "B";
@@ -153,21 +129,22 @@ int helper() {
     }
     for (int j=0; j<m; j++)
       cols[n-2][j] = cols[n-3][j];
+  }
 
-    for (int i=0; i<n; i++)
-    {
-      string row = rows[i][0];
-      for (int j=1; j<m-1; j++)
-        row += " " + rows[i][j];
-      cout << row << endl;
-    }
-    for (int i=0; i<n-1; i++)
-    {
-      string col = cols[i][0];
-      for (int j=1; j<m; j++)
-        col += " " + cols[i][j];
-      cout << col << endl;
-    }  }
+  for (int i=0; i<n; i++)
+  {
+    string row = rows[i][0];
+    for (int j=1; j<m-1; j++)
+      row += " " + rows[i][j];
+    cout << row << endl;
+  }
+  for (int i=0; i<n-1; i++)
+  {
+    string col = cols[i][0];
+    for (int j=1; j<m; j++)
+      col += " " + cols[i][j];
+    cout << col << endl;
+  }
   return 0;
 }
 
