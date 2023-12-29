@@ -59,7 +59,7 @@ int fpow(int a, int b, int m) {
 
 
 // ========== Main Function ==========
-int helper() {
+int helper1() {
   int n, m;
   cin >> n; cin >> m;
   vector<int> a(n);
@@ -116,11 +116,40 @@ int helper() {
   return 0;
 }
 
+int helper2() {
+  int n, m;
+  cin >> n; cin >> m;
+  vector<int> a(n);
+  vector<int> b(m);
+  for (int i=0; i<n; i++)
+    cin >> a[i];
+  for (int i=0; i<m; i++)
+    cin >> b[i];
+
+  sort(b.rbegin(), b.rend());
+  int pa = 0;
+  int pb = 0;
+  while (pa < n && pb < m)
+  {
+    if (a[pa] > b[pb])
+      cout << a[pa++] << " ";
+    else
+      cout << b[pb++] << " ";
+  }
+  while (pa < n)
+    cout << a[pa++] << " ";
+  while (pb < m)
+    cout << b[pb++] << " ";
+  cout << endl;
+  
+  return 0;
+}
+
 int main() {
   int cases;
   cin >> cases;
   for (int i=0; i<cases; i++)
-    helper();
+    helper2();
   return 0;
 }
 
