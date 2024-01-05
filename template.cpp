@@ -12,6 +12,7 @@
 using namespace std;
 using ll = long long;
 using PII = pair<int, int>;
+using PLL = pair<ll, ll>;
 
 const int MOD = 1000000007;
 
